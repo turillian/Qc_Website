@@ -1,0 +1,50 @@
+<!--load the static tag into the html template -->
+{% load static %}
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+	<!-- create a title block tag so we can over-write it in our page template
+		-->
+	<title>
+		
+		{% block title %}
+			Untitled Document
+		{% endblock title %}
+	</title>
+	<!-- Whenever we need to load static media, we pass the media filename, 
+	'main.css' for example, to the static tag which will automatically
+	prepend the static media directory e.g. (/static/main.css)
+	-->
+<link href = "{% static 'main.css' %}" rel="stylesheet" type="text/css">
+</head>
+<body>
+<div id="wrapper">
+	<header id="header">
+		<!-- static html tag is used to link media in templates to STATIC_ROOT
+		Because we aren't configured for production yet, STATIC_ROOT is the
+		Same as STATIC_URL setting(/static/)
+		-->
+		<div id="logo"><img src ="{%static 'logo.jpg' %}" alt =""/></div>
+		<div id="topbanner"><img src ="{%static 'top_banner.jpg' %}" alt =""/></div>
+	</header>	
+	<aside id = "leftsidebar">
+		<nav id = "nav">
+			<ul><li>Menu 1</li><li>Menu 2</li><li>Menu 3</li></ul>
+		</nav>
+	</aside>
+	<section id="main">
+		<!-- {% block <name> %} {% endblock <name> %} defines a block of 
+		template code that can be replaced by any child template that inherits 
+		from the template. <name> isn't required, but is highly recommended
+		especially when you have multiple block tags, any name is okay
+		-->
+		{% block content %} 
+		<h1>Welcome!</h1>
+		<p>This is the site template</p>
+		{% endblock content %}
+	</section>
+	<footer id="footer">Copyright &copy; 2018 Qc Co</footer>
+</div>
+</body>
+</html>

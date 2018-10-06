@@ -1,0 +1,35 @@
+<!--the page template extends the base.html (site) template -->
+{% extends "base.html" %}
+
+<!--Here we are replacing the placeholder text in the site template with 
+	{{title}}, At runtime, {{title}} will contain the title of the page
+-->
+{% block title %}{{title}}{% endblock title %}
+<!--This content block replaces the block of the same name in the parent template!-->
+{% block content %}
+<!--We need to turn auto escape off for the html we want to render as HTML-->
+<!--Django auto escapes HTML to prevent executable code injections-->
+{% autoescape off %}
+<!--this will contain the page content at runtime -->
+{{ content }}
+<!--Turn autoescape back on-->
+{% endautoescape %}
+<p>
+	<!--This is an example of applying a filter to a template tag
+		We are using Django's template language's date filter to format
+		the last_updated date from our database
+		There are many other format strings for dates available, Django's 
+		documentation is the go to reference for format dates:
+		https://docs.djangoproject.com/en/2.1/ref/templates/builtins/#date
+	-->
+	Page last updated: {{ last_updated|date:'D d F Y' }}
+</p>
+{% endblock content %}
+
+<!-- we are loading all the content from base.html eith the extends tag
+and replacing the content block with a new content block.
+
+Now we need to modify the view.py to show the template
+-->
+
+<!-- -->
